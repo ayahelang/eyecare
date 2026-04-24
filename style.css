@@ -238,22 +238,3 @@ footer a {
     margin-top: 4px;
     margin-bottom: 8px;
 }
-
-body::after {
-    content: "© Silverhawk Network";
-    position: fixed;
-    bottom: 6px;
-    right: 10px;
-    font-size: 11px;
-    opacity: .35;
-    pointer-events: none;
-}
-
-html {
-    -webkit-user-select: none;
-    user-select: none;
-}
-
-img {
-    pointer-events: none;
-}

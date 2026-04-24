@@ -356,26 +356,6 @@ window.addEventListener("load", () => {
     startTimer();
 });
 
-// Disable right click
-document.addEventListener("contextmenu", e => {
-    e.preventDefault();
-});
-
-// Disable inspect shortcuts
-document.addEventListener("keydown", e => {
-    if (
-        e.key === "F12" ||
-        (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key.toUpperCase())) ||
-        (e.ctrlKey && e.key.toUpperCase() === "U")
-    ) {
-        e.preventDefault();
-    }
-});
-
-if (window.top !== window.self) {
-    document.body.innerHTML = "Embedding not allowed";
-}
-
 /* ========= EyeCare Shield ========= */
 
 // 1. Domain Lock
@@ -398,36 +378,7 @@ if (!allowedHosts.includes(location.hostname)) {
     throw new Error("Domain blocked");
 }
 
-// 2. Detect DevTools (basic)
-setInterval(() => {
-    const w = window.outerWidth - window.innerWidth > 160;
-    const h = window.outerHeight - window.innerHeight > 160;
-
-    if (w || h) {
-        document.body.innerHTML = `
-      <div style="
-      padding:40px;
-      text-align:center;
-      font-family:Arial">
-      <h2>Developer Tools Detected</h2>
-      <p>Session terminated.</p>
-      </div>
-    `;
-    }
-}, 1500);
-
-// 3. Disable text selection
-document.addEventListener("selectstart", e => e.preventDefault());
-
-// 4. Disable drag image/link
-document.addEventListener("dragstart", e => e.preventDefault());
-
-// 5. Console bait
-console.log("%cSTOP!", "color:red;font-size:40px;font-weight:bold");
-console.log("Unauthorized copying is prohibited.");
-
 // 6. Random heartbeat
 setInterval(() => {
     localStorage.setItem("eyecare_ping", Date.now());
 }, 5000);
-
