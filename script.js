@@ -1,6 +1,3 @@
-PART 3 — script.js
-
-```javascript id="6w4z2n"
 let mins = 0;
 let started = false;
 let customSound = null;
@@ -260,102 +257,101 @@ async function startCam() {
       `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`
   });
 
-  faceMesh.setOptions({
+faceMesh.setOptions({
     maxNumFaces: 1,
     refineLandmarks: true,
     minDetectionConfidence: 0.5,
     minTrackingConfidence: 0.5
-  });
+});
 
-  faceMesh.onResults(results => {
+faceMesh.onResults(results => {
     if (
-      !results.multiFaceLandmarks ||
-      !results.multiFaceLandmarks[0]
+        !results.multiFaceLandmarks ||
+        !results.multiFaceLandmarks[0]
     )
-      return;
+        return;
 
     const lm =
-      results.multiFaceLandmarks[0];
+        results.multiFaceLandmarks[0];
 
     const left = EAR(
-      lm[33],
-      lm[160],
-      lm[158],
-      lm[133],
-      lm[153],
-      lm[144]
+        lm[33],
+        lm[160],
+        lm[158],
+        lm[133],
+        lm[153],
+        lm[144]
     );
 
     const right = EAR(
-      lm[362],
-      lm[385],
-      lm[387],
-      lm[263],
-      lm[373],
-      lm[380]
+        lm[362],
+        lm[385],
+        lm[387],
+        lm[263],
+        lm[373],
+        lm[380]
     );
 
     const ear =
-      (left + right) / 2;
+        (left + right) / 2;
 
     if (
-      ear < 0.21 &&
-      Date.now() - lastBlink > 300
+        ear < 0.21 &&
+        Date.now() - lastBlink > 300
     ) {
-      blinkCounter++;
-      lastBlink = Date.now();
+        blinkCounter++;
+        lastBlink = Date.now();
     }
 
     document.getElementById(
-      "blinkStatus"
+        "blinkStatus"
     ).textContent =
-      "Kedip terdeteksi: " +
-      blinkCounter;
+        "Kedip terdeteksi: " +
+        blinkCounter;
 
     const nose = lm[1];
     const chin = lm[152];
 
     const ok =
-      chin.y - nose.y > 0.12;
+        chin.y - nose.y > 0.12;
 
     document.getElementById(
-      "postureStatus"
+        "postureStatus"
     ).innerHTML =
-      'Postur: <span class="' +
-      (ok ? "ok" : "warn") +
-      '">' +
-      (ok
-        ? "Baik"
-        : "Terlalu Menunduk") +
-      "</span>";
-  });
+        'Postur: <span class="' +
+        (ok ? "ok" : "warn") +
+        '">' +
+        (ok
+            ? "Baik"
+            : "Terlalu Menunduk") +
+        "</span>";
+});
 
-  const cam = new Camera(video, {
+const cam = new Camera(video, {
     onFrame: async () => {
-      await faceMesh.send({
-        image: video
-      });
+        await faceMesh.send({
+            image: video
+        });
     },
     width: 640,
     height: 480
-  });
+});
 
-  cam.start();
+cam.start();
 }
 
 document
-  .getElementById("camBtn")
-  .addEventListener("click", startCam);
+    .getElementById("camBtn")
+    .addEventListener("click", startCam);
 
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register(
-    "sw.js"
-  );
+    navigator.serviceWorker.register(
+        "sw.js"
+    );
 }
 
 window.addEventListener("load", () => {
-  loadProfile();
-  drawChart();
-  startTimer();
+    loadProfile();
+    drawChart();
+    startTimer();
 });
-```
