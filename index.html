@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="theme-color" content="#0ea5e9">
+    <meta name="description"
+        content="EyeCare by Silverhawk Network - AI Eye Therapist untuk mata sehat dan fokus kerja.">
+
+    <title>EyeCare</title>
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+
+    <meta property="og:title" content="EyeCare">
+    <meta property="og:description" content="Kurangi Mata Lelah. Tingkatkan Fokus.">
+    <meta property="og:type" content="website">
+</head>
+
+<body>
+
+    <header>
+        <div class="brand">
+            <div class="logo">👁️</div>
+            <div>
+                <h1>EyeCare</h1>
+                <p>AI Eye Therapist</p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="card hero">
+            <h2>Kurangi Mata Lelah. Tingkatkan Fokus.</h2>
+            <p>Terapi mata pintar untuk laptop & HP.</p>
+            <button onclick="scrollToSetup()">Mulai Gratis</button>
+        </section>
+
+        <section class="card" id="setup">
+            <h2>Profil User</h2>
+
+            <input id="name" placeholder="Nama">
+
+            <input id="age" type="number" placeholder="Umur">
+
+            <select id="gender">
+                <option>Laki-laki</option>
+                <option>Perempuan</option>
+            </select>
+
+            <input id="tb" type="number" placeholder="Tinggi Badan (cm)">
+            <input id="bb" type="number" placeholder="Berat Badan (kg)">
+
+            <select id="vision">
+                <option>Plus</option>
+                <option>Minus</option>
+                <option>Silinder</option>
+                <option>Kombinasi</option>
+                <option>Normal</option>
+            </select>
+
+            <select id="mode">
+                <option value="work">Kerja Laptop</option>
+                <option value="gaming">Gaming</option>
+                <option value="editing">Editing</option>
+                <option value="senior">Usia 50+</option>
+            </select>
+
+            <input type="file" id="audioPicker" accept=".wav,.mp3">
+
+            <button id="startBtn">Mulai Terapi</button>
+        </section>
+
+        <section class="card">
+            <h2>Status</h2>
+            <p id="hello">Belum aktif</p>
+            <p id="session">0 menit</p>
+            <p id="next">Break berikutnya: 20 menit</p>
+
+            <button id="darkToggle">Dark Mode</button>
+            <button id="testSound">Tes Suara</button>
+            <button id="camBtn">Aktifkan Kamera</button>
+        </section>
+
+        <section class="card">
+            <h2>AI Vision Lab</h2>
+            <video id="cam" autoplay muted playsinline></video>
+            <p id="postureStatus">Postur: belum dianalisis</p>
+            <p id="blinkStatus">Kedip: belum dianalisis</p>
+        </section>
+
+        <section class="card">
+            <h2>Weekly Progress</h2>
+            <canvas id="weekChart" width="320" height="150"></canvas>
+        </section>
+
+        <section class="card">
+            <h2>EyeCare Premium</h2>
+            <ul>
+                <li>Cloud Sync</li>
+                <li>AI Reports</li>
+                <li>Custom Voice Coach</li>
+                <li>Advanced Analytics</li>
+            </ul>
+            <button id="upgradeBtn">Upgrade Premium</button>
+        </section>
+
+        <section class="card">
+            <h2>Referral</h2>
+            <button id="shareBtn">Bagikan EyeCare</button>
+        </section>
+
+    </main>
+
+    <footer>
+        Powered by
+        <a href="https://silverhawk.web.id" target="_blank">
+            Silverhawk Network
+        </a>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
